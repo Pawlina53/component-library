@@ -1,0 +1,37 @@
+{
+  "name": "component-library-pt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pawlina53/component-library.git"
+  },
+  "version": "1.0.0",
+  "description": "A simple component library.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+  },
+  "author": "Paula Thornton",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "prettier": "2.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.4"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true, // type definitions will be included
+    "jsx": "react", //compile for react
+    "lib": ["es5", "ES2015", "ES2016", "DOM", "ESNext"], //targetted libraries
+    "types": ["node"],
+    "module": "ES2015",
+    "noImplicitAny": false, // if true, cant leave any variable without a type or use any
+    "noUnusedLocals": true, //get error if a variable is not being used
+    "moduleResolution": "node",
+    "outDir": "dist/esm",
+    "sourceMap": true,
+    "esModuleInterop": true, // fixes compiling issues
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "es6"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

@@ -3,7 +3,7 @@ const Component = ({ hideModal, showModal }) => React.createElement("div", null)
 const ModalContext = createContext({
     component: Component,
     modalProps: {},
-    showModal: () => { },
+    showModal: (modal) => { },
     hideModal: () => { },
 });
 const { Provider, Consumer: ModalConsumer } = ModalContext;

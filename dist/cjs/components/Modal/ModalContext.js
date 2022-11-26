@@ -29,7 +29,7 @@ const Component = ({ hideModal, showModal }) => react_1.default.createElement("d
 const ModalContext = (0, react_1.createContext)({
     component: Component,
     modalProps: {},
-    showModal: () => { },
+    showModal: (modal) => { },
     hideModal: () => { },
 });
 exports.ModalContext = ModalContext;

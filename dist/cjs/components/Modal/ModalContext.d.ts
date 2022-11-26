@@ -5,7 +5,7 @@ declare const ModalContext: React.Context<{
         showModal: any;
     }) => JSX.Element;
     modalProps: {};
-    showModal: () => void;
+    showModal: (modal: any) => void;
     hideModal: () => void;
 }>;
 declare const ModalConsumer: React.Consumer<{
@@ -14,7 +14,7 @@ declare const ModalConsumer: React.Consumer<{
         showModal: any;
     }) => JSX.Element;
     modalProps: {};
-    showModal: () => void;
+    showModal: (modal: any) => void;
     hideModal: () => void;
 }>;
 declare const ModalProvider: ({ children }: any) => JSX.Element;
@@ -24,7 +24,7 @@ declare const useModal: () => {
         showModal: any;
     }) => JSX.Element;
     modalProps: {};
-    showModal: () => void;
+    showModal: (modal: any) => void;
     hideModal: () => void;
 };
 export { ModalContext, ModalConsumer, ModalProvider, useModal };

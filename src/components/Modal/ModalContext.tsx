@@ -11,7 +11,7 @@ const Component = ({ hideModal, showModal }) => <div></div>;
 const ModalContext = createContext({
   component: Component,
   modalProps: {},
-  showModal: () => {},
+  showModal: (modal:any) => {},
   hideModal: () => {},
 });
 

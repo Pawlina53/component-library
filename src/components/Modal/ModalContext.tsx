@@ -1,34 +1,37 @@
-import React, {
-  createContext,
-  ReactElement,
-  useContext,
-  useReducer,
-} from "react";
-import { TModalReducer } from "./Modal.types";
+import React, { createContext, useContext, useReducer } from "react";
+import {
+  ActionType,
+  TActionType,
+  TInitialStateType,
+  TModal,
+} from "./Modal.types";
 
-const Component = ({ hideModal, showModal }) => <div></div>;
-
-const ModalContext = createContext({
-  component: Component,
+let initialState: TInitialStateType = {
   modalProps: {},
-  showModal: (modal:any) => {},
-  hideModal: () => {},
-});
+  modals: [],
+  showModal: (
+    component: React.ElementType,
+    displayName: string,
+    modalProps = {}
+  ) => {},
+  hideModal: (displayName: string) => {},
+};
+
+const ModalContext = createContext<TInitialStateType>(initialState);
 
 const { Provider, Consumer: ModalConsumer } = ModalContext;
 
-const reducer = (
-  state: any,
-  { type, component, displayName, modalProps }: TModalReducer
-) => {
-  if (type === "openModal") {
+const reducer = (state: TInitialStateType, action: TActionType) => {
+  const { type, displayName, component, modalProps } = action;
+  if (type === ActionType.openModal) {
     const showIndex = state.modals
-      .map((x: TModalReducer) => x.displayName)
+      .map((x: TModal) => x.displayName)
       .indexOf(displayName);
 
     if (showIndex > -1 && state.modals[showIndex]) {
       const modals = [...state.modals];
       modals[showIndex].isActive = true;
+      modals[showIndex].displayName = displayName;
       modals[showIndex].modalProps = modalProps;
       return { ...state, modals };
     }
@@ -46,9 +49,9 @@ const reducer = (
         ],
       ],
     };
-  } else if (type === "hideModal") {
+  } else if (type === ActionType.hideModal) {
     const hideIndex = state.modals
-      .map((x) => x.displayName)
+      .map((x: TModal) => x.displayName)
       .indexOf(displayName);
     const modals = [...state.modals];
     if (hideIndex > -1 && state.modals[hideIndex]) {
@@ -56,18 +59,33 @@ const reducer = (
     }
     return { ...state, modals };
   } else {
-    throw new Error("Unspecified action.");
+    throw new Error("Invalid action.");
   }
 };
 
-const ModalProvider = ({ children }: any) => {
-  const initialState = {
+const ModalProvider = ({ children }: { children: React.ReactElement }) => {
+  initialState = {
+    modalProps: {},
     modals: [],
-    showModal: (component: ReactElement, modalProps = {}) => {
-      dispatch({ type: "openModal", component, modalProps });
+    showModal: (
+      component: React.ElementType,
+      displayName: string,
+      modalProps = {}
+    ) => {
+      const showModal: TActionType = {
+        type: ActionType.openModal,
+        displayName,
+        component,
+        modalProps,
+      };
+      dispatch(showModal);
     },
     hideModal: (displayName: string) => {
-      dispatch({ type: "hideModal", displayName });
+      const hideModal: TActionType = {
+        type: ActionType.hideModal,
+        displayName,
+      };
+      dispatch(hideModal);
     },
   };
 
@@ -75,13 +93,13 @@ const ModalProvider = ({ children }: any) => {
 
   return (
     <Provider value={state}>
-      {state.modals.map((modal) => {
-        const Component = modal.component;
+      {state.modals.map((modal: TModal) => {
+        const Component: React.ElementType | undefined = modal.component;
         return (
           Component && (
             <Component
               {...modal.modalProps}
-              hideModal={() => state.hideModal(modal.component.displayName)}
+              hideModal={state.hideModal}
               showModal={state.showModal}
               isActive={modal.isActive}
               key={modal.displayName}

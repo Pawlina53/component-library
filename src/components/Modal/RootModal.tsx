@@ -1,8 +1,7 @@
 import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { TRootModal } from "./Modal.types";
 
-export const RootModal = ({ children, hideModal, isActive }: TRootModal) => {
+const RootModal = ({ children, isActive, hideModal }: any) => {
   return (
     <Transition show={isActive} appear>
       <Dialog
@@ -10,10 +9,18 @@ export const RootModal = ({ children, hideModal, isActive }: TRootModal) => {
         static
         open={isActive}
         onClose={hideModal}
-        className="fixed top-0 z-50 w-screen h-screen"
+        style={{
+          position: `absolute`,
+          top: `0`,
+          left: `0`,
+          width: `100%`,
+          height: `100%`,
+        }}
       >
         {children}
       </Dialog>
     </Transition>
   );
 };
+
+export default RootModal;

@@ -1,19 +1,30 @@
-import { ReactElement } from "react";
-
-export type TRootModal = {
-  children: ReactElement;
-  hideModal: () => {};
-  isActive: boolean;
+export type TInitialStateType = {
+  modalProps?: {};
+  component?: React.ElementType;
+  showModal: (
+    modalComponent: React.ElementType,
+    modalName: string,
+    modalProps?: {}
+  ) => void;
+  hideModal: (modalName: string) => void;
+  modals: TModal[] | [];
 };
 
-export type TModalReducer = {
-  type: "openModal" | "hideModal";
-  component?: any;
-  displayName?: string;
-  modalProps?: any;
-  isActive?: boolean;
-};
+export enum ActionType {
+  hideModal = "hideModal",
+  openModal = "openModal",
+}
 
-export type TModalComponent = {
+export type TActionType = {
+  type: ActionType;
   displayName: string;
+  component?: React.ElementType;
+  modalProps?: {};
+};
+
+export type TModal = {
+  isActive: boolean;
+  displayName: string;
+  component?: React.ElementType;
+  modalProps?: {};
 };

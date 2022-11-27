@@ -1,3 +1,2 @@
-export * from "./Modal/RootModal";
-export * from "./Modal/ModalContext";
-export * from "./Modal/ModalRoot";
+export * from "./Modal";
+export * from "./Theme";

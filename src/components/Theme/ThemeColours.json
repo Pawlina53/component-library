@@ -1,0 +1,34 @@
+[
+  {
+    "name": "red",
+    "value": "#fa5457"
+  },
+  {
+    "name": "orange",
+    "value": "#fa8925"
+  },
+  {
+    "name": "yellow",
+    "value": "#f7d942"
+  },
+  {
+    "name": "green",
+    "value": "#5fa55a"
+  },
+  {
+    "name": "blue",
+    "value": "#5480e6"
+  },
+  {
+    "name": "purple",
+    "value": "#8c54e6"
+  },
+  {
+    "name": "lilac",
+    "value": "#cf95fb"
+  },
+  {
+    "name": "pink",
+    "value": "#e86daf"
+  }
+]
